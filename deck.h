@@ -4,14 +4,14 @@
 #include <stdlib.h>
 
 /**
- * emun kind_e - Emuneration of card suits.
+ * enum kind_e - Enumeration of card suits.
  * @SPADE: Spades suit.
  * @HEART: Hearts suit.
  * @CLUB: Clubs suit.
  * @DIAMOND: Diamonds suit.
  */
 
-typedef emun kind_e
+typedef enum kind_e
 {
 	SPADE = 0,
 	HEART,
