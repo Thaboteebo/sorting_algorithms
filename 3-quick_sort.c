@@ -33,29 +33,29 @@ void swap_ints(int *a, int *b)
 
 int lomuto_partition(int *array, size_t size, int left, int right)
 {
-	int *pivot, above, below;
+	int *driver, up, down;
 
-	pivot = array + right;
-	for (above = below = left; below < right; below++)
+	driver = array + right;
+	for (up = down = left; down < right; down++)
 	{
-		if (array[below] < *pivot)
+		if (array[down] < *driver)
 		{
-			if (above < below)
+			if (up < down)
 			{
-				swap_ints(array + below, array + above);
+				swap_ints(array + down, array + up);
 				print_array(array, size);
 			}
-			above++;
+			up++;
 		}
 	}
 
-	if (array[above] > *pivot)
+	if (array[up] > *driver)
 	{
-		swap_ints(array + above, pivot);
+		swap_ints(array + up, driver);
 		print_array(array, size);
 	}
 
-	return (above);
+	return (up);
 }
 
 /**
@@ -70,20 +70,20 @@ int lomuto_partition(int *array, size_t size, int left, int right)
 
 void lomuto_sort(int *array, size_t size, int left, int right)
 {
-	int part;
+	int belong;
 
 	if (right - left > 0)
 	{
-		part = lomuto_partition(array, size, left, right);
-		lomuto_sort(array, size, left, part - 1);
-		lomuto_sort(array, size, part + 1, right);
+		belong = lomuto_partition(array, size, left, right);
+		lomuto_sort(array, size, left, belong - 1);
+		lomuto_sort(array, size, belong + 1, right);
 	}
 }
 
 /**
  * quick_sort - Sort an array of integers in ascending
  * order using the quicksort algorithm.
- * @array: AN array of integers.
+ * @array: An array of integers.
  * @size: The size of the array.
  *
  * Description: Uses the Lomuto partition scheme. Prints
@@ -93,7 +93,7 @@ void lomuto_sort(int *array, size_t size, int left, int right)
 void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
-		return;;
+		return;
 
 	lomuto_sort(array, size, 0, size - 1);
 }
